@@ -3,6 +3,25 @@ ModelRelationships
 
 This Rails plugin is a way to define your model relationships in one place.
 
+The purpose of this is to consolidate model relationships in one place.  In Rails
+routes are define in config/routes.rb, the environment in config/environment.rb,
+deployment in config/deploy.rb, schema in db/schema.rb, but the model relationships
+are all scattered about in many different model files in the app/models directory.
+
+The purpose of this is to take all of those parent->child model relationships and
+define it in one place.  In this plugin, I do it in environment.rb using a very
+non-DSL type definition.  In the future, this should be done better, but this works
+for what I want to do.
+
+You'll notice that my schema definitions use a generic :children key rather than
+has_many or belongs_to keyword.  My reasoning for this is that my parent/child
+relationships are defined in a separate Association model to allow for a more generic
+way of defining linkages.  This is a join table.  I do this for ease of development
+and am willing to take the performance hit.
+
+Don't let this associations table scare you.  This could and should be extended to
+do generic has_many type relationships.  What's nice about this method is it creates
+both bindings in the models (parent to children and child to parent).
 
 Example
 =======
