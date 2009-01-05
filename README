@@ -1,13 +1,19 @@
 ModelRelationships
 ==================
 
-Introduction goes here.
+This Rails plugin is a way to define your model relationships in one place.
 
 
 Example
 =======
 
-Example goes here.
+in environment.rb
 
+ModelRelationships.define([ :Auction, { :children => [:Item,:Donor] } ],
+                          [ :Donor, { :children => [:Item] } ],
+                          [ :User, { :children => [:Auction] } ],
+                          [ :Item ],
+                          [ :Note ]
+                         )
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Copyright (c) 2009 John H. Aughey, released under the MIT license
